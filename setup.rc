@@ -1,23 +1,26 @@
 # --- Configuration ---
 
+# Database backup location.
+BACKUP_DIR=/var/backup
+
+# Export chunk size.
+CHUNK_SIZE_GB=2
+
 # Organization.
 ORG="Spuds"
 
-# Export chunk size.
-chunk_size_gb=2
-
 # Sync Plan name.
 PLAN_NAME="Priority_Content"
-
-# Define the Repo-to-Product mapping
-REPO_SET_LIST=("Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)" \
-               "Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)" \
-               "Red Hat Satellite 6.18 for RHEL 9 x86_64" \
-               "Red Hat Satellite Maintenance 6.18 for RHEL 9 x86_64 (RPMs)")
 
 declare -A REPO_MAP
 REPO_MAP["Red Hat Enterprise Linux 9 for x86_64 - AppStream RPMs 9"]="Red Hat Enterprise Linux for x86_64"
 REPO_MAP["Red Hat Enterprise Linux 9 for x86_64 - BaseOS RPMs 9"]="Red Hat Enterprise Linux for x86_64"
 REPO_MAP["Red Hat Satellite 6.18 for RHEL 9 x86_64 RPMs"]="Red Hat Satellite"
 REPO_MAP["Red Hat Satellite Maintenance 6.18 for RHEL 9 x86_64 RPMs"]="Red Hat Enterprise Linux for x86_64"
+
+# Define the Repo-to-Product mapping
+REPO_SET_LIST=("Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)" \
+               "Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)" \
+               "Red Hat Satellite 6.18 for RHEL 9 x86_64" \
+               "Red Hat Satellite Maintenance 6.18 for RHEL 9 x86_64 (RPMs)")
 

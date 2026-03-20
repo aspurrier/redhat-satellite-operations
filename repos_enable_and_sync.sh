@@ -6,6 +6,38 @@ set -e
 # Ensure this file exists and contains the REPO_MAP associative array
 source ./setup.rc
 
+local missing_vars=()
+
+# Check for required variables that must be defined after sourcing setup.rc
+local required_vars=("ORG" "PLAN_NAME" "REPO_MAP" "REPO_SET_LIST")
+
+for var in "${required_vars[@]}"; do
+    if [[ -z "${!var}" ]]; then
+        missing_vars+=("$var")
+    fi
+done
+
+# Check if any variables are missing
+if [[ ${#missing_vars[@]} -gt 0 ]]; then
+    echo "Error: The following variables are not defined or have empty values:" >&2
+    for var in "${missing_vars[@]}"; do
+        echo "  $var" >&2
+    done
+    echo "Please check your setup.rc file and ensure all required variables are defined." >&2
+    exit 1
+fi
+
+# Validate that REPO_MAP is not empty
+if [[ ${#REPO_MAP[@]} -eq 0 ]]; then
+    echo "Error: REPO_MAP is empty. No repositories to process." >&2
+    exit 1
+fi
+
+# Validate that REPO_SET_LIST is not empty
+if [[ ${#REPO_SET_LIST[@]} -eq 0 ]]; then
+    echo "Error: REPO_SET_LIST is empty. No repository sets to process." >&2
+    exit 1
+fi
 
 
 echo "Checking Satellite State for Organization: $ORG"
